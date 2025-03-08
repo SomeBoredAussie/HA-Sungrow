@@ -1,0 +1,6 @@
+#create via new template sensor in HA
+- name: "Real load" # includes house power and inverter loss
+        unit_of_measurement: W
+        device_class: power
+        state: >
+          {{ states('sensor.load_power')|int(default=0) + states('sensor.inverter_loss')|int(default=0) }}
