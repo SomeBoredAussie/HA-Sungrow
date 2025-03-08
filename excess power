@@ -1,0 +1,2 @@
+#create via new template sensor in HA
+{{ states('sensor.total_dc_power') | int(0) - states('sensor.real_load') | int(0) - states('sensor.inverter_loss') | int(0) }}
