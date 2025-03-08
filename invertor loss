@@ -1,0 +1,8 @@
+#create via new template sensor in HA
+ 
+  - sensor:
+      - name: "Inverter loss"
+        unit_of_measurement: W
+        device_class: power
+        state: >
+          {{ states('sensor.total_dc_power')|int(default=0) - states('sensor.signed_battery_power')|int(default=0) - states('sensor.load_power')|int(default=0) - states('sensor.export_power_raw')|int(default=0) }}
