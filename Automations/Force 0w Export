@@ -1,0 +1,25 @@
+### this is a automation I created due to SAPN overriding Ambers solar curtailment
+
+
+alias: Automate put export limit to 0
+description: ""
+triggers:
+  - trigger: time_pattern
+    seconds: "30"
+conditions:
+  - condition: and
+    conditions:
+      - condition: numeric_state
+        entity_id: sensor.home_feed_in_price
+        below: "0.01"
+      - condition: numeric_state
+        entity_id: input_number.set_sg_export_power_limit
+        above: 0
+actions:
+  - action: input_number.set_value
+    metadata: {}
+    data:
+      value: 0
+    target:
+      entity_id: input_number.set_sg_export_power_limit
+mode: single
